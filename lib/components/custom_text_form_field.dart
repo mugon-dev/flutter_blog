@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
-
   final String hint;
 
   const CustomTextFormField({required this.hint});
@@ -11,8 +10,9 @@ class CustomTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5.0),
       child: TextFormField(
+        obscureText: hint == "Password" ? true : false,
         decoration: InputDecoration(
-          hintText: "$hint",
+          hintText: "Enter $hint",
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
           ),
@@ -26,7 +26,6 @@ class CustomTextFormField extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
         ),
-
       ),
     );
   }
