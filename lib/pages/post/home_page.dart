@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/pages/post/detail_page.dart';
 import 'package:flutter_blog/size.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -11,7 +13,9 @@ class HomePage extends StatelessWidget {
         itemCount: 3,
         itemBuilder: (context, index) {
           return ListTile(
-            onTap: () {},
+            onTap: () {
+              Get.to(DetailPage(index), arguments: "arguments 속성 테스트");
+            },
             title: Text("제목1"),
             leading: Text("1"),
           );
