@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/components/custom_elevated_button.dart';
-import 'package:flutter_blog/components/custom_text_form_field.dart';
-import 'package:flutter_blog/components/custom_textarea.dart';
-import 'package:flutter_blog/pages/post/home_page.dart';
 import 'package:flutter_blog/util/validator_util.dart';
+import 'package:flutter_blog/view/components/custom_elevated_button.dart';
+import 'package:flutter_blog/view/components/custom_text_form_field.dart';
+import 'package:flutter_blog/view/components/custom_textarea.dart';
 import 'package:get/get.dart';
 
-class WritePage extends StatelessWidget {
+class UpdatePage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -22,16 +21,18 @@ class WritePage extends StatelessWidget {
               CustomTextFormField(
                 hint: "Title",
                 funValidator: validatorTitle(),
+                value: "제목1" * 2,
               ),
               CustomTextarea(
                 hint: "content",
                 funValidator: validatorContent(),
+                value: "내용1" * 30,
               ),
               CustomElevatedButton(
-                text: "글쓰기",
+                text: "글 수정하기",
                 funPageRoute: () {
                   _formKey.currentState!.validate();
-                  Get.off(HomePage());
+                  Get.back();
                 },
               )
             ],
