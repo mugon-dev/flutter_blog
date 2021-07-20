@@ -71,7 +71,7 @@ class HomePage extends StatelessWidget {
             children: [
               TextButton(
                 onPressed: () {
-                  Get.to(WritePage());
+                  Get.to(() => WritePage());
                 },
                 child: Text(
                   '글쓰기',
@@ -85,7 +85,7 @@ class HomePage extends StatelessWidget {
               Divider(),
               TextButton(
                 onPressed: () {
-                  Get.to(UserInfo());
+                  Get.to(() => UserInfo());
                 },
                 child: Text(
                   '회원정보보기',
