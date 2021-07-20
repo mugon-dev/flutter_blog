@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
 
     // homepage에 도착하면 데이터 뿌리기
     // 만들어진 post controller가 없으니 put
-    PostController p = Get.put(PostController());
+    PostController p = Get.put(PostController()); // 객체 생성 (create, initialize)
     p.findAll();
 
     return Scaffold(
@@ -26,20 +26,22 @@ class HomePage extends StatelessWidget {
         title: Text("${u.isLogin}"),
       ),
       drawer: _navigation(context),
-      body: ListView.separated(
-        itemCount: 3,
-        itemBuilder: (context, index) {
-          return ListTile(
-            onTap: () {
-              Get.to(DetailPage(index), arguments: "arguments 속성 테스트");
-            },
-            title: Text("제목1"),
-            leading: Text("1"),
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return Divider();
-        },
+      body: Obx(
+        () => ListView.separated(
+          itemCount: p.posts.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              onTap: () {
+                Get.to(DetailPage(index), arguments: "arguments 속성 테스트");
+              },
+              title: Text("${p.posts[index].title}"),
+              leading: Text("${p.posts[index].id}"),
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return Divider();
+          },
+        ),
       ),
     );
   }
