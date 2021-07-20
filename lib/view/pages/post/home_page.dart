@@ -38,6 +38,8 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _navigation(BuildContext context) {
+    // controller를 class 변수로 선언하거나 필요한 곳에서 찾기
+    UserController u = Get.find();
     return Container(
       width: getDrawerWidth(context),
       height: double.infinity,
@@ -78,7 +80,8 @@ class HomePage extends StatelessWidget {
               Divider(),
               TextButton(
                 onPressed: () {
-                  Get.to(LoginPage());
+                  u.logout();
+                  Get.to(() => LoginPage());
                 },
                 child: Text(
                   '로그아웃',

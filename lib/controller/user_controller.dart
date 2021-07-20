@@ -7,6 +7,11 @@ class UserController extends GetxController {
   // 로그인 상태
   final RxBool isLogin = false.obs; // Rx : 관찰 가능한 변수 => 변경 감지 => UI가 자동 업데이트
 
+  void logout() {
+    isLogin.value = false;
+    jwtToken = null;
+  }
+
   Future<String> login(String username, String password) async {
     String token = await _userRepository.login(username, password);
     // 토근 관리 : shared preference 에 저장하면 앱이 꺼져도 남아있음, 파일로 저장하면 앱이 꺼지만 다시 받아와야함
