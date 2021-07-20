@@ -8,6 +8,15 @@ import 'package:get/get.dart';
 class PostRepository {
   final PostProvider _postProvider = PostProvider();
 
+  Future<int> deleteById(int id) async {
+    Response response = await _postProvider.deleteById(id);
+    dynamic body = response.body;
+    dynamic convertBody = convertUtf8ToObject(body);
+    CMRespDto cmRespDto = CMRespDto.fromJson(convertBody);
+
+    return cmRespDto.code!;
+  }
+
   Future<Post> findById(int id) async {
     Response response = await _postProvider.findById(id);
     dynamic body = response.body;

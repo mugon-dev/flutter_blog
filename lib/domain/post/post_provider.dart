@@ -13,4 +13,7 @@ class PostProvider extends GetConnect {
   // 게시글 하나 찾기
   Future<Response> findById(int id) =>
       get("$host/post/$id", headers: {"Authorization": jwtToken ?? ""});
+
+  Future<Response> deleteById(int id) =>
+      delete("$host/post/$id", headers: {"Authorization": jwtToken ?? ""});
 }

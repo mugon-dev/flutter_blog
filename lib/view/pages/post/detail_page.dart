@@ -33,23 +33,26 @@ class DetailPage extends StatelessWidget {
                 ),
               ),
               Divider(),
-              Row(
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Get.off(HomePage()); // 임시
-                    },
-                    child: Text("삭제"),
-                  ),
-                  SizedBox(width: 10),
-                  ElevatedButton(
-                    onPressed: () {
-                      Get.to(UpdatePage());
-                    },
-                    child: Text("수정"),
-                  ),
-                ],
-              ),
+              u.principal.value.id == p.post.value.user!.id
+                  ? Row(
+                      children: [
+                        ElevatedButton(
+                          onPressed: () async {
+                            await p.deleteById(p.post.value.id!);
+                            Get.off(() => HomePage()); // 임시
+                          },
+                          child: Text("삭제"),
+                        ),
+                        SizedBox(width: 10),
+                        ElevatedButton(
+                          onPressed: () {
+                            Get.to(UpdatePage());
+                          },
+                          child: Text("수정"),
+                        ),
+                      ],
+                    )
+                  : SizedBox(),
               Expanded(
                 child: SingleChildScrollView(
                   child: Text("${p.post.value.content}"),
