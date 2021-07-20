@@ -64,9 +64,9 @@ class LoginPage extends StatelessWidget {
               // Get.to(HomePage());
               // trim() : 공백제거
               // TextEditingController로 텍스트 받아올수있음
-              String token =
+              int result =
                   await u.login(_username.text.trim(), _password.text.trim());
-              if (token != "-1") {
+              if (result == 1) {
                 // print("토큰 정상적으로 받음");
                 Get.to(() => HomePage());
               } else {
