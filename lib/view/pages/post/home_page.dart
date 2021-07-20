@@ -9,6 +9,7 @@ import 'package:flutter_blog/view/pages/user/user_info.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
+  var refreshKey = GlobalKey<RefreshIndicatorState>();
   @override
   Widget build(BuildContext context) {
     // put : 없으면 만들고 있으면 찾아서 사용
@@ -27,22 +28,29 @@ class HomePage extends StatelessWidget {
       ),
       drawer: _navigation(context),
       body: Obx(
-        () => ListView.separated(
-          itemCount: p.posts.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              onTap: () async {
-                await p.findById(p.posts[index].id!);
-                Get.to(() => DetailPage(p.posts[index].id),
-                    arguments: "arguments 속성 테스트");
-              },
-              title: Text("${p.posts[index].title}"),
-              leading: Text("${p.posts[index].id}"),
-            );
+        () => RefreshIndicator(
+          key: refreshKey,
+          onRefresh: () async {
+            // onRefresh 가 Future<void> 타입이기 때문에 async 필요
+            await p.findAll();
           },
-          separatorBuilder: (BuildContext context, int index) {
-            return Divider();
-          },
+          child: ListView.separated(
+            itemCount: p.posts.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                onTap: () async {
+                  await p.findById(p.posts[index].id!);
+                  Get.to(() => DetailPage(p.posts[index].id),
+                      arguments: "arguments 속성 테스트");
+                },
+                title: Text("${p.posts[index].title}"),
+                leading: Text("${p.posts[index].id}"),
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return Divider();
+            },
+          ),
         ),
       ),
     );
