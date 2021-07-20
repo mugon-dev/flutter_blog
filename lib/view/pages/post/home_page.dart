@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
   var refreshKey = GlobalKey<RefreshIndicatorState>();
+  var scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     // put : 없으면 만들고 있으면 찾아서 사용
@@ -23,6 +24,17 @@ class HomePage extends StatelessWidget {
     p.findAll();
 
     return Scaffold(
+      key: scaffoldKey,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          if (scaffoldKey.currentState!.isDrawerOpen) {
+            scaffoldKey.currentState!.openEndDrawer();
+          } else {
+            scaffoldKey.currentState!.openDrawer();
+          }
+        },
+        child: Icon(Icons.code),
+      ),
       appBar: AppBar(
         title: Text("${u.isLogin}"),
       ),
@@ -85,6 +97,10 @@ class HomePage extends StatelessWidget {
               Divider(),
               TextButton(
                 onPressed: () {
+                  // 페이지 이동할때 drawer 비활성화
+                  // Navigator.pop(context); // 제일 위에 쌓인 stack 제거
+                  scaffoldKey.currentState!
+                      .openEndDrawer(); // scaffold key를 통해 제거
                   Get.to(() => UserInfo());
                 },
                 child: Text(
