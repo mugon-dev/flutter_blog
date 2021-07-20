@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-const host = "192.168.0.157:8080";
+const host = "http://192.168.0.157:8080";
 
 // 역할 : 통신
 class UserProvider extends GetConnect {
