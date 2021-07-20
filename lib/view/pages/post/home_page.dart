@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/controller/post_controller.dart';
 import 'package:flutter_blog/controller/user_controller.dart';
 import 'package:flutter_blog/size.dart';
 import 'package:flutter_blog/view/pages/post/detail_page.dart';
@@ -14,6 +15,12 @@ class HomePage extends StatelessWidget {
     // UserController u = Get.put(UserController());
     // find : 있으니까 찾아서 사용
     UserController u = Get.find();
+
+    // homepage에 도착하면 데이터 뿌리기
+    // 만들어진 post controller가 없으니 put
+    PostController p = Get.put(PostController());
+    p.findAll();
+
     return Scaffold(
       appBar: AppBar(
         title: Text("${u.isLogin}"),
