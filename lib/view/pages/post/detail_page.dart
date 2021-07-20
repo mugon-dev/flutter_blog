@@ -46,7 +46,7 @@ class DetailPage extends StatelessWidget {
                         SizedBox(width: 10),
                         ElevatedButton(
                           onPressed: () {
-                            Get.to(UpdatePage());
+                            Get.to(() => UpdatePage());
                           },
                           child: Text("수정"),
                         ),

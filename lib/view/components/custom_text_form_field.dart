@@ -3,14 +3,10 @@ import 'package:flutter/material.dart';
 class CustomTextFormField extends StatelessWidget {
   final String hint;
   final funValidator;
-  final String? value;
   final controller;
 
   const CustomTextFormField(
-      {required this.hint,
-      required this.funValidator,
-      this.value,
-      this.controller});
+      {required this.hint, required this.funValidator, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +14,6 @@ class CustomTextFormField extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 5.0),
       child: TextFormField(
         controller: controller,
-        initialValue: value,
         validator: funValidator,
         obscureText: hint == "Password" ? true : false,
         decoration: InputDecoration(
